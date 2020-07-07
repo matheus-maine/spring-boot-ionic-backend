@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.matheusmaine.cursomc.domain.Categoria;
 import com.matheusmaine.cursomc.repositories.CategoriaRepository;
 
+import javassist.tools.rmi.ObjectNotFoundException;
+
 @Service
 public class CategoriaService {
 	
@@ -15,10 +17,10 @@ public class CategoriaService {
 	private CategoriaRepository categoriaRepository; // injeção de dependencia
 	
 	//usando Spring boot 2.xxx
-	public Categoria buscarCategoria(Integer id) {
-		Optional<Categoria> cat = categoriaRepository.findById(id);
-		return cat.orElse(null);
-				
+	public Categoria buscarCategoria(Integer id) throws ObjectNotFoundException {
+		Optional<Categoria> obj = categoriaRepository.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 
 }
