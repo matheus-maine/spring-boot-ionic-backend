@@ -7,22 +7,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.matheusmaine.cursomc.domain.Categoria;
-import com.matheusmaine.cursomc.services.CategoriaService;
+import com.matheusmaine.cursomc.domain.Cliente;
+import com.matheusmaine.cursomc.services.ClienteService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
 @RestController
-@RequestMapping(value = "/categorias")
-public class CategoriaResource {
+@RequestMapping(value = "/clientes")
+public class ClienteResource {
 
 	@Autowired
-	private CategoriaService categoriaService;
+	private ClienteService clienteService;
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> find(@PathVariable Integer id) throws ObjectNotFoundException {
-		Categoria cat = categoriaService.buscarCategoria(id);
-		return ResponseEntity.ok().body(cat);
+		Cliente cli = clienteService.buscarCliente(id);
+		return ResponseEntity.ok().body(cli);
 	}
 
 }
