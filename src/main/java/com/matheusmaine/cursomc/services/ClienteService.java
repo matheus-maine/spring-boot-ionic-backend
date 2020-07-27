@@ -17,7 +17,7 @@ public class ClienteService {
 	private ClienteRepository clienteRepository; // injeção de dependencia
 	
 	//usando Spring boot 2.xxx
-	public Cliente buscarCliente(Integer id) throws ObjectNotFoundException {
+	public Cliente find(Integer id) throws ObjectNotFoundException {
 		Optional<Cliente> obj = clienteRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));

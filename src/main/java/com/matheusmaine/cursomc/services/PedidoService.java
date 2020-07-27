@@ -17,7 +17,7 @@ public class PedidoService {
 	private PedidoRepository pedidoRepository; // injeção de dependencia
 	
 	//usando Spring boot 2.xxx
-	public Pedido buscarPedido(Integer id) throws ObjectNotFoundException {
+	public Pedido find(Integer id) throws ObjectNotFoundException {
 		Optional<Pedido> obj = pedidoRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));

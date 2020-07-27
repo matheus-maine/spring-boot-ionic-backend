@@ -17,7 +17,7 @@ public class CategoriaService {
 	private CategoriaRepository categoriaRepository; // injeção de dependencia
 	
 	//usando Spring boot 2.xxx
-	public Categoria buscarCategoria(Integer id) throws ObjectNotFoundException {
+	public Categoria find(Integer id) throws ObjectNotFoundException {
 		Optional<Categoria> obj = categoriaRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
@@ -27,4 +27,9 @@ public class CategoriaService {
 		obj.setId(null);
 		return categoriaRepository.save(obj);
 	}
-}
+	
+	public Categoria update (Categoria obj) throws ObjectNotFoundException {
+		find(obj.getId());
+		return categoriaRepository.save(obj);
+	}
+} 
