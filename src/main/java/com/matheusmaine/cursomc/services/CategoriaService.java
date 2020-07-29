@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.matheusmaine.cursomc.domain.Categoria;
+import com.matheusmaine.cursomc.dto.CategoriaDTO;
 import com.matheusmaine.cursomc.repositories.CategoriaRepository;
 import com.matheusmaine.cursomc.services.exceptions.DataIntegrityViolation;
 
@@ -47,15 +48,18 @@ public class CategoriaService {
 			throw new DataIntegrityViolation("Não é possivel excluir uma categoria que possui produtos!");
 		}
 	}
-	
-	public List<Categoria> findAll (){
+
+	public List<Categoria> findAll() {
 		return categoriaRepository.findAll();
 	}
-	
-	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
-	 PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-	 return categoriaRepository.findAll(pageRequest);
+
+	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return categoriaRepository.findAll(pageRequest);
 	}
 	
-	
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
+	}
+
 }
